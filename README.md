@@ -1,11 +1,20 @@
 # AWT font, native image build
 
-To build the native image run (Make sure that you have installed native-image):
-````
-> ./build.sh
-````
-To run the native executable
+For [GraalVM's issue #2729](https://github.com/oracle/graal/issues/2729)
 
-````
-./awtfont-nativeimage -Djava.home=${JAVA_HOME}
-````
+First, run the application in standard JVM to generate the native-image configuration files:
+
+	mvn compile exec:exec
+
+Then, to build the native image, run:
+
+	mvn package
+
+To run the generated native executable, e.g. in Linux:
+
+	./target/native-image/awtfont-native-image
+
+or in Windows:
+
+	target\native-image\awtfont-native-image.exe -Djava.home="%JAVA_HOME%"
+
